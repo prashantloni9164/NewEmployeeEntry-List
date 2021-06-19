@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import sqlite3
 
 app=Flask(__name__)
@@ -11,17 +11,34 @@ def home():
 
 @app.route('/add', methods = ['GET', 'POST'])
 def add_student():
-    if request.method
-    return render_template('add_student.html')
+    if request.method == 'GET':
+        return render_template('add_student.html')
+    else:
+        student_details = (
+            request.form['firstname'],
+            request.form['surname'],
+            request.form['address'],
+            request.form['suburb']
+        )
+        insert_student(student_details)
+        return render_template('add-sucess.html')
 
-def query1():
+def insert_student(student_details):
     db_locale = 'student.db'
     con = sqlite3.connect(db_locale)
     c = con.cursor()
+    query2 = 'insert into contact_details (firstname, surname, address, suburb)  values (?, ?, ?, ?)'
+    c.execute(query2, student_details)
+    con.commit()
+    con.close()
 
-    c.execute('''
-    select * from contact_details
-    ''')
+def query1():
+    db_locale = 'student.db'
+    con = sqlite3.connect(
+        db_locale)
+    c = con.cursor()
+
+    c.execute('select * from contact_details')
 
     student = c.fetchall()
     return student

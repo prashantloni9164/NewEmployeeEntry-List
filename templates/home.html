@@ -1,8 +1,9 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
+   ags -->
+    <meta charset="utf-8"><h1> Welcome </h1>
+    <!-- Required meta t
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap CSS -->
@@ -12,12 +13,11 @@
     <title>Hello, world!</title>
 </head>
 <body>
+
     <a class="btn btn-primary" href="{{ url_for('home') }}" role="button">Home</a>
     <a class="btn btn-primary" href="{{ url_for('add_student') }}" role="button">Add Student</a>
 
-{% for student in student_data %}
-<p>{{ student[0]}} {{ student[1]}}</p>
-{% endfor %}
+
 <table class="table">
     <thead>
     <tr>
